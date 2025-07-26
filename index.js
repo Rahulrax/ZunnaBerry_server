@@ -1,3 +1,6 @@
+const contactRoutes = require("./routes/contact");
+const authRoutes = require("./routes/auth");
+
 require("dotenv").config();
 
 const express = require("express");
@@ -20,6 +23,10 @@ mongoose
 app.get("/", (req, res) => {
   res.json({ message: "👋 Welcome to the Zunnaberry backend API!" });
 });
+
+app.use("/api/contact", contactRoutes);
+
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
