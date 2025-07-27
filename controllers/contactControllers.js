@@ -2,22 +2,14 @@ const Contact = require("../models/contact");
 
 exports.deleteContact = async (req, res) => {
   try {
-    // The ID of the contact to delete will be in the URL parameters
     const contact = await Contact.findById(req.params.id);
-
-    // If no contact is found with that ID, return an error
     if (!contact) {
       return res.status(404).json({ msg: "Contact not found" });
     }
-
-    // Use the .deleteOne() method to remove it from the database
     await contact.deleteOne();
-
-    // Send back a success message
     res.json({ msg: "Contact removed successfully" });
   } catch (err) {
     console.error(err.message);
-    // If the ID is not a valid format, it will throw an error
     if (err.kind === "ObjectId") {
       return res.status(404).json({ msg: "Contact not found" });
     }
