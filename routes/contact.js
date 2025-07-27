@@ -7,6 +7,7 @@ const router = express.Router();
 const {
   submitContactForm,
   getContacts,
+  deleteContact,
 } = require("../controllers/contactControllers");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -18,4 +19,6 @@ router.post("/", submitContactForm);
 router.get("/", authMiddleware, getContacts);
 
 // We export the router to be used in our main index.js file
+router.delete("/:id", authMiddleware, deleteContact);
+
 module.exports = router;
